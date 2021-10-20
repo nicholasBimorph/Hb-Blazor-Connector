@@ -1,0 +1,156 @@
+﻿@page "/dashboard"
+
+@using HB.RestAPI.Core.Services
+@using HB.RestAPI.Core.Settings;
+@using HB.RestAPI.Core.Models
+@using HbBlazorConnector.Data
+@using System.Diagnostics.Eventing.Reader
+@using HB.RestAPI.Core.Interfaces
+@using HB.RestAPI.Core.Models.Types
+@using System.Collections.ObjectModel
+
+@inject HBApiClient HbApiClient
+@inject HbApiEndPoints HbApiEndPoints
+@inject ISerializer Serializer
+@inject IHbFactory HbObjectFactory
+
+
+<div>
+    <h3>Revit Area Data </h3>
+
+    <br />
+    <br />
+
+    @if (_categoryTypes == null)
+    {
+        <div>
+            <p><em>Loading...</em></p>
+            
+            <br />
+            <br />
+
+            @*<MatProgressCircle Indeterminate="true" FourColored="true" Size="MatProgressCircleSize.Large" />*@
+            
+            <MatProgressBar Indeterminate="true"></MatProgressBar>
+
+        </div>
+    }
+
+    else
+    {
+        <br />
+        <br />
+
+        <div>
+
+            
+            
+            @*<MatTable Items="@_areaObjects">
+                <MatTableHeader >
+                    <th>Area</th>
+                    <th>Plot</th>
+                    <th>Level</th>
+                    <th>Block</th>
+                    <th>Unit Type</th>
+                    <th>Area Type</th>
+                    <th>Accessibility Type</th>
+                    <th>Space Type</th>
+                    <th>Tenure</th>
+
+                </MatTableHeader>
+                <MatTableRow>
+                    <td>@context.Area </td>
+                    <td>@context.Plot</td>
+                    <td>@context.Level</td>
+                    <td>@context.Block</td>
+                    <td>@context.UnitType</td>
+                    <td>@context.AreaType</td>
+                    <td>@context.AccessibilityType</td>
+                    <td>@context.SpaceType</td>
+                    <td>@context.Tenure</td>
+                </MatTableRow>
+            </MatTable>*@
+            
+            <MatTable Items="@_areaObjects">
+                <MatTableHeader>
+
+                    @foreach (var categoryType in _categoryTypes)
+                    {
+                        <th>@categoryType </th>
+                    }
+
+
+                </MatTableHeader>
+                <MatTableRow>
+
+                    @foreach (var parameter in context.Properties)
+                    {
+                        <td>@parameter.Value </td>
+                    }
+
+                </MatTableRow>
+            </MatTable>
+
+        </div>
+    }
+
+
+
+</div>
+
+
+@code {
+
+    ApplicationDataContainer _receivedData;
+
+    readonly IList<HbArea> _areaObjects = null;
+
+    private IList<string> _categoryTypes = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        string response = await HbApiClient.GetRequest(HbApiEndPoints.GetLatestEndPoint);
+
+        _receivedData =  Serializer.Deserialize<ApplicationDataContainer>(response);
+
+        var hbObjects = HbObjectFactory.Create(_receivedData.ApplicationData);
+
+        _categoryTypes = ExtractCategoriesForTable(hbObjects);
+
+    }
+
+    /// <summary>
+    /// Extracts all the column header categories that will be available
+    /// </summary>
+    /// <returns></returns>
+    private IList<string> ExtractCategoriesForTable(IList<IHbObject> hbObjects)
+    {
+        IList<string> categoryTypesTemp = new List<string>();
+
+        foreach (var hbObject in hbObjects)
+        {
+            if (hbObject is HbArea hbArea)
+            {
+                var properties = hbArea.Properties;
+
+                foreach (var parameter in properties)
+                {
+                    string categoryNameCamelcase = parameter.Name;
+
+                    if (!categoryTypesTemp.Contains(categoryNameCamelcase))
+                        categoryTypesTemp.Add(categoryNameCamelcase);
+                }
+            }
+        }
+
+        return categoryTypesTemp;
+    }
+
+
+    }
+
+ 
+
+
+}

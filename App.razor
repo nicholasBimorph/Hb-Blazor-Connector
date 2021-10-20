@@ -1,0 +1,31 @@
+@using MatBlazor
+
+<MatThemeProvider Theme="@BlazorConnectorTheme">
+
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+
+            <MatPortalHost></MatPortalHost>
+
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+
+    </Router>
+
+
+
+</MatThemeProvider>
+
+@code {
+
+    MatTheme BlazorConnectorTheme = new MatTheme()
+    {
+        Primary = MatThemeColors.Orange._700.Value,
+        Secondary = MatThemeColors.BlueGrey._500.Value
+    };
+}

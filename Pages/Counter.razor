@@ -1,0 +1,69 @@
+﻿@page "/counter"
+
+
+
+<h1>Counter</h1>
+<br />
+
+
+
+<div hidden="@Hide">
+    
+    <p>
+        <MatTextField @bind-Value="@IncrementAmount" Label="amount"></MatTextField>
+
+        Current count: @_currentCount
+    </p>
+
+    <br />
+    <br />
+
+    <p>I am I will get hidden</p>
+
+    <br/>
+    <br/>
+
+    <MatButton Raised="true" OnClick="IncrementCount" Icon="account_circle">Count</MatButton>
+
+    <br/>
+    <br/>
+
+    <MatButton Raised="true" OnClick="Clear" Icon="account_circle">Clear</MatButton>
+
+</div>
+
+<br/>
+<br/>
+
+<MatSlideToggle @bind-Value="@Hide"></MatSlideToggle>
+
+
+@code {
+
+
+    public MatTheme BlazorConnectorTheme;
+
+    private int _currentCount = 0;
+
+    [Parameter]
+    public int IncrementAmount { get; set; }
+
+    private bool Hide { get; set; } = false;
+
+    private void IncrementCount()
+    {
+
+        _currentCount += IncrementAmount;
+    }
+
+    private void Clear()
+    {
+        _currentCount = 0;
+
+        this.IncrementAmount = 0;
+    }
+
+
+}
+
+
