@@ -10,7 +10,6 @@ C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debu
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debug\net5.0\HbBlazorConnector.pdb
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debug\net5.0\HbBlazorConnector.Views.dll
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debug\net5.0\HbBlazorConnector.Views.pdb
-C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\obj\Debug\net5.0\HbBlazorConnector.csproj.AssemblyReference.cache
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\obj\Debug\net5.0\HbBlazorConnector.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\obj\Debug\net5.0\HbBlazorConnector.AssemblyInfoInputs.cache
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\obj\Debug\net5.0\HbBlazorConnector.AssemblyInfo.cs
@@ -63,3 +62,4 @@ C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debu
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debug\net5.0\HB.RestAPI.Core.pdb
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\bin\Debug\net5.0\MongoDB.Bson.dll
+C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\obj\Debug\net5.0\HbBlazorConnector.csproj.AssemblyReference.cache

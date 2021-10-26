@@ -41,10 +41,11 @@
         <br />
         <br />
 
-        <div>
+        @*<div>*@
 
-            
-            
+
+        //Example of unflexible code!
+
             @*<MatTable Items="@_areaObjects">
                 <MatTableHeader >
                     <th>Area</th>
@@ -70,6 +71,7 @@
                     <td>@context.Tenure</td>
                 </MatTableRow>
             </MatTable>*@
+        //Example of unflexible code!
             
             <MatTable Items="@_areaObjects">
                 <MatTableHeader>
@@ -91,7 +93,7 @@
                 </MatTableRow>
             </MatTable>
 
-        </div>
+        @*</div>*@
     }
 
 
@@ -103,9 +105,9 @@
 
     ApplicationDataContainer _receivedData;
 
-    readonly IList<HbArea> _areaObjects = null;
+    private IList<IHbObject> _areaObjects;
 
-    private IList<string> _categoryTypes = null;
+    private IList<string> _categoryTypes ;
 
     protected override async Task OnInitializedAsync()
     {
@@ -114,9 +116,9 @@
 
         _receivedData =  Serializer.Deserialize<ApplicationDataContainer>(response);
 
-        var hbObjects = HbObjectFactory.Create(_receivedData.ApplicationData);
+        _areaObjects = HbObjectFactory.Create(_receivedData.ApplicationData);
 
-        _categoryTypes = ExtractCategoriesForTable(hbObjects);
+        _categoryTypes = ExtractCategoriesForTable(_areaObjects);
 
     }
 
@@ -150,7 +152,3 @@
 
     }
 
- 
-
-
-}

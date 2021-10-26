@@ -161,14 +161,14 @@ using System.Collections.ObjectModel;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 102 "C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\Pages\Dashboard.razor"
+#line 104 "C:\Users\nicho\Documents\Bimorph\Clients\HB\Workshops\HbBlazorConnector\Pages\Dashboard.razor"
        
 
     ApplicationDataContainer _receivedData;
 
-    readonly IList<HbArea> _areaObjects = null;
+    private IList<IHbObject> _areaObjects;
 
-    private IList<string> _categoryTypes = null;
+    private IList<string> _categoryTypes ;
 
     protected override async Task OnInitializedAsync()
     {
@@ -177,9 +177,9 @@ using System.Collections.ObjectModel;
 
         _receivedData =  Serializer.Deserialize<ApplicationDataContainer>(response);
 
-        var hbObjects = HbObjectFactory.Create(_receivedData.ApplicationData);
+        _areaObjects = HbObjectFactory.Create(_receivedData.ApplicationData);
 
-        _categoryTypes = ExtractCategoriesForTable(hbObjects);
+        _categoryTypes = ExtractCategoriesForTable(_areaObjects);
 
     }
 
